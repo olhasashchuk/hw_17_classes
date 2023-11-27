@@ -54,7 +54,7 @@ class FormValidate{
             }
         }
 
-        if (this.success) {
+        if (this.valid) {
             const valueMethod = form.getAttribute("method");
             const valueAction = form.getAttribute("action");
             console.log(`Method - ${valueMethod}`);
@@ -67,6 +67,8 @@ class FormValidate{
         const minLength = element.dataset.min_length;
         if (element.value.length <= +minLength) {
             this.errorTemplate(element, message)
+            const errorMinMessage = element.closest(`.${FormValidate.FORM_CONTROL_CLASS_NAME}`).querySelector(`.${FormValidate.ERROR_ITEM_CLASS_NAME}`);
+            errorMinMessage.textContent = `Мінімальна довжина ${minLength} символів`;
         }
 
         if (element.value.length === 0) {
